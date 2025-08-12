@@ -3,13 +3,13 @@ import type { Metadata } from "next"
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import "./globals.css"
-import { DataProvider } from "@/contexts/data-context"
-import { Header } from "@/components/layout/header"
+import { Navigation } from "@/components/layout/navigation"
+import { ThemeProvider } from "@/providers/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: "TenderMind - Análisis Inteligente de Licitaciones",
-  description: "Plataforma de análisis automatizado de documentos de licitación con IA",
+  title: "Licitaciones IA - Gestión Inteligente de Licitaciones",
+  description: "Sistema de gestión y análisis de licitaciones en construcción con inteligencia artificial",
   generator: "v0.dev",
 }
 
@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <head>
         <style>{`
 html {
@@ -30,13 +30,13 @@ html {
         `}</style>
       </head>
       <body>
-        <DataProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <div className="min-h-screen bg-background">
-            <Header />
+            <Navigation />
             <main className="container mx-auto px-4 py-8">{children}</main>
           </div>
           <Toaster />
-        </DataProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
